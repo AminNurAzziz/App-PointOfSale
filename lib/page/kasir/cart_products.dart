@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:pos_aplication/cart_provider.dart';
+import 'package:pos_aplication/services/cart_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class CartProducts extends StatefulWidget {
   const CartProducts({Key? key}) : super(key: key);
@@ -27,7 +30,13 @@ class _CartProductsState extends State<CartProducts> {
     for (var i = 0; i < cart.length; i++) {
       total += cart[i]['hargaProduk'] * cart[i]['stok'];
     }
+    print("==============INI TOTAL================");
+    String formattedTotal = NumberFormat.currency(
+      symbol: 'Rp. ',
+      decimalDigits: 2,
+    ).format(total);
     print(cart);
+    print("==============================");
     return Container(
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 241, 241, 241),
@@ -64,7 +73,7 @@ class _CartProductsState extends State<CartProducts> {
                   ),
                 ),
                 Container(
-                  width: 75, // Adjust width as needed
+                  width: 120, // Adjust width as needed
                   child: Text(
                     'Produk',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -117,7 +126,7 @@ class _CartProductsState extends State<CartProducts> {
                               ),
                             ),
                             Container(
-                              width: 80, // Adjust width as needed
+                              width: 120, // Adjust width as needed
                               child: Center(
                                 child: Text(item['namaProduk'],
                                     style: TextStyle(fontSize: 15)),
@@ -170,7 +179,7 @@ class _CartProductsState extends State<CartProducts> {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Text(
-                'Rp. ${total.toString()}',
+                formattedTotal,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Container(

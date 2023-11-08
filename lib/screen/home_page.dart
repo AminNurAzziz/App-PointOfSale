@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:pos_aplication/list_products.dart';
+import 'package:pos_aplication/page/kasir/list_products.dart';
+import 'package:pos_aplication/page/produk.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,14 +57,18 @@ class _HomePageState extends State<HomePage> {
                     title: Text('Kasir'),
                     leading: Icon(Icons.monetization_on),
                     onTap: () {
-                      // Your logic here
+                      setState(() {
+                        _currentIndex = 0;
+                      });
                     },
                   ),
                   ListTile(
                     title: Text('Tambah Menu'),
                     leading: Icon(Icons.add_box),
                     onTap: () {
-                      // Your logic here
+                      setState(() {
+                        _currentIndex = 1;
+                      });
                     },
                   ),
                   // ... Other ListTiles
@@ -106,7 +112,13 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListProduct(),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: [
+          ListProduct(),
+          Produk(),
+        ],
+      ),
     );
   }
 }

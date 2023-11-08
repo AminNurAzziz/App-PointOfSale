@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pos_aplication/cart_products.dart';
-import 'package:pos_aplication/data_dummy.dart';
-import 'package:pos_aplication/cart_provider.dart';
+import 'package:pos_aplication/page/kasir/cart_products.dart';
+import 'package:pos_aplication/services/data_dummy.dart';
+import 'package:pos_aplication/services/cart_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ListProduct extends StatefulWidget {
   const ListProduct({Key? key}) : super(key: key);
@@ -12,13 +15,63 @@ class ListProduct extends StatefulWidget {
 }
 
 class _ListProductState extends State<ListProduct> {
+  List<Map<String, dynamic>> products = [];
+  String tokenFromAuth = '';
+
+  @override
+  void initState() {
+    super.initState();
+    tokenFromAuth = Provider.of<CartProvider>(context, listen: false).token;
+    if (tokenFromAuth != '') {
+      fetchData(tokenFromAuth);
+    } else {
+      getTokenFromLocalStorage().then((token) {
+        if (token != null) {
+          fetchData(token);
+        }
+      });
+    }
+  }
+
+  Future<String?> getTokenFromLocalStorage() async {
+    final prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    return token;
+  }
+
+  Future<void> fetchData(String token) async {
+    final response = await http.get(
+      Uri.parse('http://192.168.178.135:3000/produk'),
+      headers: {'Authorization': 'Bearer $token'},
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body);
+      print('---------------------------');
+      final data = json.decode(response.body);
+      print(data);
+
+      if (data['error'] == false) {
+        setState(() {
+          products = List<Map<String, dynamic>>.from(data['data']);
+        });
+      } else {
+        // Handle error
+        print('Error: ${data['message']}');
+      }
+    } else {
+      // Handle HTTP error
+      print('HTTP Error: ${response.statusCode}');
+    }
+  }
+
   void onTapCart(int index) {
     Provider.of<CartProvider>(context, listen: false).addToCart({
-      'id': products[index]['id'],
+      'id': products[index]['_id'],
       'namaProduk': products[index]['namaProduk'],
       'hargaProduk': products[index]['hargaProduk'],
       'gambarProduk': products[index]['gambarProduk'],
-      'stok': products[index]['stok'],
+      'stok': 1,
     });
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -65,8 +118,9 @@ class _ListProductState extends State<ListProduct> {
                         children: [
                           // Gambar
                           Image.asset(
-                            product['gambarProduk']
-                                as String, // Path gambar produk
+                            'assets/chicken.jpg',
+                            // product['gambarProduk']
+                            //     as String, // Path gambar produk
                             width:
                                 80, // Sesuaikan lebar gambar sesuai kebutuhan
                             height:
@@ -84,7 +138,7 @@ class _ListProductState extends State<ListProduct> {
                                     fontSize: 20, color: Colors.black),
                               ),
                               Text(
-                                "${product['stok']} in stock",
+                                "${product['stokProduk']} in stock",
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: const Color.fromARGB(255, 73, 73, 73),
