@@ -1,0 +1,125 @@
+warning: in the working copy of 'android/gradle/wrapper/gradle-wrapper.properties', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'pubspec.lock', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/pubspec.lock b/pubspec.lock[m
+[1mindex 6b2b9b3..05b4f59 100644[m
+[1m--- a/pubspec.lock[m
+[1m+++ b/pubspec.lock[m
+[36m@@ -130,10 +130,10 @@[m [mpackages:[m
+     dependency: "direct dev"[m
+     description:[m
+       name: flutter_lints[m
+[31m-      sha256: a25a15ebbdfc33ab1cd26c63a6ee519df92338a9c10f122adda92938253bef04[m
+[32m+[m[32m      sha256: e2a421b7e59244faef694ba7b30562e489c2b489866e505074eb005cd7060db7[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "2.0.3"[m
+[32m+[m[32m    version: "3.0.1"[m
+   flutter_plugin_android_lifecycle:[m
+     dependency: transitive[m
+     description:[m
+[36m@@ -156,10 +156,10 @@[m [mpackages:[m
+     dependency: "direct dev"[m
+     description:[m
+       name: font_awesome_flutter[m
+[31m-      sha256: "1f93e5799f0e6c882819e8393a05c6ca5226010f289190f2242ec19f3f0fdba5"[m
+[32m+[m[32m      sha256: "52671aea66da73b58d42ec6d0912b727a42248dd9a7c76d6c20f275783c48c08"[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "9.2.0"[m
+[32m+[m[32m    version: "10.6.0"[m
+   google_fonts:[m
+     dependency: "direct dev"[m
+     description:[m
+[36m@@ -188,10 +188,10 @@[m [mpackages:[m
+     dependency: "direct dev"[m
+     description:[m
+       name: image_picker[m
+[31m-      sha256: b6951e25b795d053a6ba03af5f710069c99349de9341af95155d52665cb4607c[m
+[32m+[m[32m      sha256: "7d7f2768df2a8b0a3cefa5ef4f84636121987d403130e70b17ef7e2cf650ba84"[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "0.8.9"[m
+[32m+[m[32m    version: "1.0.4"[m
+   image_picker_android:[m
+     dependency: transitive[m
+     description:[m
+[36m@@ -204,10 +204,10 @@[m [mpackages:[m
+     dependency: transitive[m
+     description:[m
+       name: image_picker_for_web[m
+[31m-      sha256: "869fe8a64771b7afbc99fc433a5f7be2fea4d1cb3d7c11a48b6b579eb9c797f0"[m
+[32m+[m[32m      sha256: "50bc9ae6a77eea3a8b11af5eb6c661eeb858fdd2f734c2a4fd17086922347ef7"[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "2.2.0"[m
+[32m+[m[32m    version: "3.0.1"[m
+   image_picker_ios:[m
+     dependency: transitive[m
+     description:[m
+[36m@@ -252,10 +252,10 @@[m [mpackages:[m
+     dependency: "direct dev"[m
+     description:[m
+       name: intl[m
+[31m-      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"[m
+[32m+[m[32m      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "0.17.0"[m
+[32m+[m[32m    version: "0.18.1"[m
+   js:[m
+     dependency: transitive[m
+     description:[m
+[36m@@ -268,10 +268,10 @@[m [mpackages:[m
+     dependency: transitive[m
+     description:[m
+       name: lints[m
+[31m-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"[m
+[32m+[m[32m      sha256: cbf8d4b858bb0134ef3ef87841abdf8d63bfc255c266b7bf6b39daa1085c4290[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "2.1.1"[m
+[32m+[m[32m    version: "3.0.0"[m
+   matcher:[m
+     dependency: transitive[m
+     description:[m
+[36m@@ -388,10 +388,10 @@[m [mpackages:[m
+     dependency: "direct dev"[m
+     description:[m
+       name: provider[m
+[31m-      sha256: cdbe7530b12ecd9eb455bdaa2fcb8d4dad22e80b8afb4798b41479d5ce26847f[m
+[32m+[m[32m      sha256: "659adaefa8196fa2799d7ac3dca3c2e831e549dc40b082d07a599fe9150d75fc"[m
+       url: "https://pub.dev"[m
+     source: hosted[m
+[31m-    version: "6.0.5"[m
+[32m+[m[32m    version: "6.1.0"[m
+   shared_preferences:[m
+     dependency: "direct dev"[m
+     description:[m
+[1mdiff --git a/pubspec.yaml b/pubspec.yaml[m
+[1mindex 7e6a6f4..49b144c 100644[m
+[1m--- a/pubspec.yaml[m
+[1m+++ b/pubspec.yaml[m
+[36m@@ -39,7 +39,7 @@[m [mdependencies:[m
+ dev_dependencies:[m
+   flutter_test:[m
+     sdk: flutter[m
+[31m-  font_awesome_flutter: ^9.1.0[m
+[32m+[m[32m  font_awesome_flutter: ^10.6.0[m
+   provider: ^6.0.1[m
+ [m
+   # The "flutter_lints" package below contains a set of recommended lints to[m
+[36m@@ -47,11 +47,11 @@[m [mdev_dependencies:[m
+   # activated in the `analysis_options.yaml` file located at the root of your[m
+   # package. See that file for information about deactivating specific lint[m
+   # rules and activating additional ones.[m
+[31m-  flutter_lints: ^2.0.0[m
+[32m+[m[32m  flutter_lints: ^3.0.1[m
+   google_fonts: ^6.1.0[m
+[31m-  intl: ^0.17.0[m
+[32m+[m[32m  intl: ^0.18.1[m
+   shared_preferences: ^2.2.2[m
+[31m-  image_picker: ^0.8.4+2[m
+[32m+[m[32m  image_picker: ^1.0.4[m
+ # For information on the generic Dart part of this file, see the[m
+ # following page: https://dart.dev/tools/pub/pubspec[m
+ [m

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pos_aplication/page/kasir/list_products.dart';
 import 'package:pos_aplication/page/produk.dart';
+import 'package:pos_aplication/theme.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,10 +18,10 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.green[800],
-        title: const Text(
+        backgroundColor: myTheme.colorScheme.primary,
+        title: Text(
           'POS Aplication',
-          style: TextStyle(color: Colors.white),
+          style: myTheme.textTheme.headline6,
         ),
         actions: [
           IconButton(
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(top: 30),
                     height: 100,
                     decoration: BoxDecoration(
-                      color: Colors.green[800],
+                      color: myTheme.colorScheme.primary,
                     ),
                     child: Text(
                       'Menu',

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 import 'package:pos_aplication/page/login.dart';
 import 'package:pos_aplication/screen/home_page.dart';
 import 'package:pos_aplication/page/produk.dart';
-import 'package:provider/provider.dart';
 import 'package:pos_aplication/services/cart_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/widgets.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +39,7 @@ Future<String?> refreshToken(String? token) async {
 class MyApp extends StatelessWidget {
   final String? token;
   const MyApp({Key? key, this.token}) : super(key: key);
-  // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -52,11 +53,7 @@ class MyApp extends StatelessWidget {
         },
         initialRoute: '/',
         title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme:
-              ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 0, 255, 132)),
-          useMaterial3: true,
-        ),
+        theme: myTheme,
       ),
     );
   }
