@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pos_aplication/screen/home_page.dart';
+import 'package:pos_aplication/Screen/HomePage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider extends ChangeNotifier {

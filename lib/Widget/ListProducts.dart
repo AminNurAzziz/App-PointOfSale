@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pos_aplication/page/kasir/cart_products.dart';
-import 'package:pos_aplication/services/data_dummy.dart';
-import 'package:pos_aplication/services/cart_provider.dart';
+import 'package:pos_aplication/Widget/CardProducts.dart';
+import 'package:pos_aplication/Services/data_dummy.dart';
+import 'package:pos_aplication/Services/CardProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

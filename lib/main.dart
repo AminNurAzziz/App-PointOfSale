@@ -4,10 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:pos_aplication/page/login.dart';
-import 'package:pos_aplication/screen/home_page.dart';
-import 'package:pos_aplication/page/produk.dart';
-import 'package:pos_aplication/services/cart_provider.dart';
+import 'package:pos_aplication/Screen/LoginPage.dart';
+import 'package:pos_aplication/Screen/HomePage.dart';
+import 'package:pos_aplication/Screen/AddProdukPage.dart';
+import 'package:pos_aplication/Services/CardProvider.dart';
 import 'theme.dart';
 
 void main() async {

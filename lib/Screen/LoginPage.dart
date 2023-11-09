@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import 'package:pos_aplication/services/cart_provider.dart';
+import 'package:pos_aplication/Services/CardProvider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
