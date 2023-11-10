@@ -19,14 +19,14 @@ class CartProvider extends ChangeNotifier {
   List<Map<String, dynamic>> get cart => _cart;
   void addToCart(Map<String, dynamic> product) {
     final existingProductIndex =
-        _cart.indexWhere((item) => item['id'] == product['id']);
+        _cart.indexWhere((item) => item['idProduk'] == product['idProduk']);
     // print('====================================================');
     // print(existingProductIndex);
     // print('====================================================');
 
     if (existingProductIndex != -1) {
-      _cart[existingProductIndex]['stok'] += 1;
-      print(_cart[existingProductIndex]['stok']);
+      _cart[existingProductIndex]['jumlahProduk'] += 1;
+      print(_cart[existingProductIndex]['jumlahProduk']);
     } else {
       _cart.add(product);
     }

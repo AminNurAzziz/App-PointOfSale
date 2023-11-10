@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:pos_aplication/Services/CardProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:pos_aplication/Services/Transaksi.dart';
 
 class CartProducts extends StatefulWidget {
   const CartProducts({Key? key}) : super(key: key);
@@ -15,10 +16,26 @@ class CartProducts extends StatefulWidget {
 class _CartProductsState extends State<CartProducts> {
   @override
   void onTapStruk() {
+    final cartProvider = context.read<CartProvider>().cart;
+    TransaksiService transaksiService = TransaksiService();
+    List<Map<String, dynamic>> idProduk = [];
+    double total = 0.0;
+    for (var i = 0; i < cartProvider.length; i++) {
+      idProduk.add({
+        '_id': cartProvider[i]['idProduk'],
+        'jumlahProduk': cartProvider[i]['jumlahProduk'],
+      });
+    }
+    Transaksi transaksi = Transaksi(
+      idProduk: idProduk,
+    );
+
+    transaksiService.addTransaksi(transaksi);
+
     Provider.of<CartProvider>(context, listen: false).removeAll();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Semua barang berhasil dihapus'),
+        content: Text('Semua barang berhasil ditambahkan'),
         duration: Duration(seconds: 1),
       ),
     );
@@ -28,7 +45,7 @@ class _CartProductsState extends State<CartProducts> {
     final cart = context.watch<CartProvider>().cart;
     double total = 0.0;
     for (var i = 0; i < cart.length; i++) {
-      total += cart[i]['hargaProduk'] * cart[i]['stok'];
+      total += cart[i]['hargaProduk'] * cart[i]['jumlahProduk'];
     }
     print("==============INI TOTAL================");
     String formattedTotal = NumberFormat.currency(
@@ -135,7 +152,7 @@ class _CartProductsState extends State<CartProducts> {
                             Container(
                               width: 80, // Adjust width as needed
                               child: Center(
-                                child: Text(item['stok'].toString(),
+                                child: Text(item['jumlahProduk'].toString(),
                                     style: TextStyle(fontSize: 15)),
                               ),
                             ),
@@ -143,7 +160,7 @@ class _CartProductsState extends State<CartProducts> {
                               width: 80, // Adjust width as needed
                               child: Center(
                                 child: Text(
-                                    (item['hargaProduk'] * item['stok'])
+                                    (item['hargaProduk'] * item['jumlahProduk'])
                                         .toString(),
                                     style: TextStyle(fontSize: 15)),
                               ),

@@ -6,7 +6,7 @@ import 'dart:convert';
 
 import 'package:pos_aplication/Screen/LoginPage.dart';
 import 'package:pos_aplication/Screen/HomePage.dart';
-import 'package:pos_aplication/Screen/AddProdukPage.dart';
+import 'package:pos_aplication/Screen/ProdukFormWidget.dart';
 import 'package:pos_aplication/Services/CardProvider.dart';
 import 'theme.dart';
 

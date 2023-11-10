@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pos_aplication/Widget/ListProducts.dart';
-import 'package:pos_aplication/Screen/AddProdukPage.dart';
+import 'package:pos_aplication/Screen/ProdukFormWidget.dart';
 import 'package:pos_aplication/theme.dart';
 
 class HomePage extends StatefulWidget {

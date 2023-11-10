@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:pos_aplication/Services/CardProvider.dart';
+import 'package:pos_aplication/Services/User.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -15,65 +16,60 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool isPasswordVisible = false;
-  bool isLoading = false;
+
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-
   Future<void> login() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    final response = await http.post(
-      Uri.parse("http://192.168.178.135:3000/login"),
-      body: {
-        'username': usernameController.text,
-        'password': passwordController.text,
-      },
+    User user = User(
+      username: usernameController.text,
+      password: passwordController.text,
     );
+    UserService userService = UserService();
 
-    setState(() {
-      isLoading = false;
-    });
+    try {
+      final result = await userService.login(user);
 
-    if (response.statusCode == 200 &&
-        json.decode(response.body)['error'] == false) {
-      final token = json.decode(response.body)["loginResult"]["token"];
-      Provider.of<CartProvider>(context, listen: false).setToken(token);
-
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Success'),
-          content: Text('Login successful!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // Close the dialogvv
-                Navigator.pushNamed(context, '/homePage');
-              },
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text(
-            json.decode(response.body)['error'],
+      if (result['success']) {
+        final token = result['data']["loginResult"]["token"];
+        Provider.of<CartProvider>(context, listen: false).setToken(token);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Success'),
+            content: const Text('Login successful!'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context); // Tutup dialog
+                  Navigator.pushNamed(context, '/homePage');
+                },
+                child: const Text('OK'),
+              ),
+            ],
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
+        );
+      } else {
+        _showErrorDialog(result['errorMessage']);
+      }
+    } catch (e) {
+      _showErrorDialog(e.toString());
     }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Error'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
   }
 
   @override
