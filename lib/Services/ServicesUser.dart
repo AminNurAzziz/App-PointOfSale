@@ -1,27 +1,9 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-class User {
-  final String? nama;
-  final String? email;
-  final String? username;
-  final String? password;
-  final String? alamat;
-  final String? noHp;
-  final String? role;
+import 'package:pos_aplication/Model/ModelUser.dart';
 
-  User({
-    this.nama,
-    this.email,
-    this.username,
-    this.password,
-    this.alamat,
-    this.noHp,
-    this.role,
-  });
-}
-
-class UserService {
+class ServiceUser {
   static const baseUrl = "http://192.168.178.135:3000";
 
   Future<Map<String, dynamic>> login(User user) async {

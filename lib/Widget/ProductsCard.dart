@@ -1,23 +1,23 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:pos_aplication/Services/CardProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
-import 'package:pos_aplication/Services/Transaksi.dart';
 
-class CartProducts extends StatefulWidget {
-  const CartProducts({Key? key}) : super(key: key);
+import 'package:pos_aplication/Services/ServicesTransaksi.dart';
+import 'package:pos_aplication/State/ProviderCard.dart';
+import 'package:pos_aplication/Model/ModelTransaksi.dart';
+
+class ProductsCart extends StatefulWidget {
+  const ProductsCart({Key? key}) : super(key: key);
 
   @override
-  State<CartProducts> createState() => _CartProductsState();
+  State<ProductsCart> createState() => _ProductsCartState();
 }
 
-class _CartProductsState extends State<CartProducts> {
+class _ProductsCartState extends State<ProductsCart> {
   @override
   void onTapStruk() {
-    final cartProvider = context.read<CartProvider>().cart;
-    TransaksiService transaksiService = TransaksiService();
+    final cartProvider = context.read<ProviderCart>().cart;
+    ServiceTransaksi transaksiService = ServiceTransaksi();
     List<Map<String, dynamic>> idProduk = [];
     double total = 0.0;
     for (var i = 0; i < cartProvider.length; i++) {
@@ -32,7 +32,7 @@ class _CartProductsState extends State<CartProducts> {
 
     transaksiService.addTransaksi(transaksi);
 
-    Provider.of<CartProvider>(context, listen: false).removeAll();
+    Provider.of<ProviderCart>(context, listen: false).removeAll();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Semua barang berhasil ditambahkan'),
@@ -42,18 +42,17 @@ class _CartProductsState extends State<CartProducts> {
   }
 
   Widget build(BuildContext context) {
-    final cart = context.watch<CartProvider>().cart;
+    final cart = context.watch<ProviderCart>().cart;
     double total = 0.0;
     for (var i = 0; i < cart.length; i++) {
       total += cart[i]['hargaProduk'] * cart[i]['jumlahProduk'];
     }
-    print("==============INI TOTAL================");
+
     String formattedTotal = NumberFormat.currency(
       symbol: 'Rp. ',
       decimalDigits: 2,
     ).format(total);
-    print(cart);
-    print("==============================");
+
     return Container(
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 241, 241, 241),
