@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:pos_aplication/Widget/FormAddProduk.dart';
+import 'package:pos_aplication/Widget/ProductsFormAdd.dart';
 
 class Produk extends StatefulWidget {
   const Produk({Key? key}) : super(key: key);
@@ -48,7 +48,7 @@ class _ProdukState extends State<Produk> {
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: SingleChildScrollView(
-          child: ProdukFormWidget(), // Use the widget here
+          child: ProductsFormWidget(), // Use the widget here
         ),
       ),
     );

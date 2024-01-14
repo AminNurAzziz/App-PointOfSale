@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:pos_aplication/Services/Produk.dart';
+import 'package:pos_aplication/Services/ServicesProducts.dart';
 
 void main() {
   group('Produk', () {
@@ -12,7 +12,7 @@ void main() {
 
     test('getIdAdmin should return idAdmin from SharedPreferences', () async {
       // Buat instance dari Produk
-      final produk = Produk();
+      final produk = ServicesProduct();
 
       // Panggil metode getIdAdmin
       final idAdmin = await produk.getIdAdmin();
