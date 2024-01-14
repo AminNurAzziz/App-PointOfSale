@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:pos_aplication/Services/Produk.dart';
 
-import 'package:pos_aplication/Services/ServicesProducts.dart';
-import 'package:pos_aplication/State/ProviderProducts.dart';
-import 'package:pos_aplication/Model/ModelProduct.dart';
-
-class ProductsFormWidget extends StatefulWidget {
-  const ProductsFormWidget({Key? key}) : super(key: key);
+class ProdukFormWidget extends StatefulWidget {
+  const ProdukFormWidget({Key? key}) : super(key: key);
 
   @override
-  State<ProductsFormWidget> createState() => _ProductsFormWidgetState();
+  State<ProdukFormWidget> createState() => _ProdukFormWidgetState();
 }
 
-class _ProductsFormWidgetState extends State<ProductsFormWidget> {
+class _ProdukFormWidgetState extends State<ProdukFormWidget> {
   TextEditingController _namaController = TextEditingController();
   TextEditingController _hargaController = TextEditingController();
   TextEditingController _stokController = TextEditingController();
@@ -39,7 +35,7 @@ class _ProductsFormWidgetState extends State<ProductsFormWidget> {
     String kategoriProduk = selectedKategori;
     String gambarProduk = _gambarController.text != "" ? 'nulll' : 'null11';
 
-    ServicesProduct produk = ServicesProduct();
+    Produk produk = Produk();
     Product newProduct = Product(
       name: namaProduk,
       price: hargaProduk,
@@ -47,8 +43,7 @@ class _ProductsFormWidgetState extends State<ProductsFormWidget> {
       category: kategoriProduk,
       imageUrl: gambarProduk,
     );
-    // produk.addProduct(newProduct);
-    Provider.of<ProviderProduct>(context, listen: false).addProduct(newProduct);
+    produk.addProduct(newProduct);
   }
 
   @override

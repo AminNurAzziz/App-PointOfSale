@@ -6,10 +6,8 @@ import 'dart:convert';
 
 import 'package:pos_aplication/Screen/LoginPage.dart';
 import 'package:pos_aplication/Screen/HomePage.dart';
-import 'package:pos_aplication/State/ProviderCard.dart';
-import 'package:pos_aplication/State/ProviderProducts.dart';
-import 'package:pos_aplication/State/ProviderAuth.dart';
-
+import 'package:pos_aplication/Screen/ProdukFormWidget.dart';
+import 'package:pos_aplication/Services/CardProvider.dart';
 import 'theme.dart';
 
 void main() async {
@@ -46,15 +44,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => ProviderCart()),
-        ChangeNotifierProvider(create: (_) => ProviderProduct()),
-        ChangeNotifierProvider(create: (_) => ProviderAuth()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: MaterialApp(
         routes: {
           '/': (context) => token != null ? HomePage() : LoginPage(),
           '/homePage': (context) => HomePage(),
-          // '/editProduk': (context) => ProdukEditWidget(),
         },
         initialRoute: '/',
         title: 'Flutter Demo',
